@@ -172,21 +172,10 @@ registerBlockType( 'derweili/iframe-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: function( props ) {
+    const { className } = props;
+    const { url } = props.attributes;
 		return (
-			<div>
-				<p>— Hello from the frontend.</p>
-				<p>
-					CGB BLOCK: <code>iframe-embed-block</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
-			</div>
+      <iframe src={url} className={className} frameborder="0"></iframe>
 		);
 	},
 } );
