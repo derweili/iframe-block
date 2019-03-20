@@ -65,7 +65,6 @@ registerBlockType( 'derweili/iframe-block', {
      constructor(props) {
          super(...arguments);
          this.props = props;
-         console.log('beforeSetState ', this.props.attributes.url );
          this.state = {
     				showPreview: this.props.attributes.url ? true : false,
             cannotEmbed: false
@@ -76,7 +75,6 @@ registerBlockType( 'derweili/iframe-block', {
       * Save changed URL to attributes
       */
      onUrlChange( newUrl ) {
-       console.log('new URL', newUrl);
        this.props.setAttributes( { url: newUrl } );
      }
 
@@ -84,7 +82,6 @@ registerBlockType( 'derweili/iframe-block', {
       * Validate URL and Toogle Preview
       */
      togglePreview( event ) {
-       console.log('tooglePreview', this);
        const { url } = this.props.attributes;
        const { showPreview } = this.state;
 
