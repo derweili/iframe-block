@@ -1,0 +1,37 @@
+# Copyright (C) 2019 derweili
+# This file is distributed under the same license as the PDF Embed Block plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: PDF Embed Block 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/iframe-block\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-04-18T13:39:46+00:00\n"
+"PO-Revision-Date: 2019-04-18 15:40+0200\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Domain: iframe-block\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+#. Plugin Name of the plugin
+msgid "PDF Embed Block"
+msgstr "PDF Einbettungs-Block"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/ahmadawais/create-guten-block/"
+msgstr "https://github.com/ahmadawais/create-guten-block/"
+
+#. Description of the plugin
+msgid "PDF Block for the Gutenberg Block Editor"
+msgstr "PDF Block für Gutenberg Block Editor"
+
+#. Author of the plugin
+msgid "derweili"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://derweili.de/"
+msgstr ""

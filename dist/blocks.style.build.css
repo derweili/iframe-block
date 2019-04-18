@@ -14,3 +14,12 @@
   .derweili-pdf-block iframe {
     width: 100%;
     height: 600px; }
+
+.derweili-pdf-block--iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; }
+  .derweili-pdf-block--iframe-container iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%; }

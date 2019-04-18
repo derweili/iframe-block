@@ -5,9 +5,11 @@
   "scripts": {
     "start": "cgb-scripts start",
     "build": "cgb-scripts build",
-    "eject": "cgb-scripts eject"
+    "eject": "cgb-scripts eject",
+    "i18n": "wp i18n make-pot . languages/derweili-pdf-block.pot"
   },
   "dependencies": {
-    "cgb-scripts": "1.15.0"
+    "cgb-scripts": "1.15.0",
+    "wp-pot-cli": "^1.2.4"
   }
 }

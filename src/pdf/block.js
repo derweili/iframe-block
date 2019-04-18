@@ -13,13 +13,11 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 
 const { Component } = wp.element;
-const { BlockControls } = wp.editor;
+const { BlockControls, MediaPlaceholder, AlignmentToolbar, InspectorControls, RichText } = wp.editor;
 
 import { Fragment } from '@wordpress/element';
-import { Button, Placeholder, TextControl, Toolbar, IconButton, FormFileUpload, Disabled } from '@wordpress/components';
+import { Button, Placeholder, TextControl, Toolbar, IconButton, FormFileUpload, Disabled, PanelBody, RadioControl } from '@wordpress/components';
 
-// import {  } from '@wordpress/block-editor';
-const { MediaPlaceholder } = wp.editor;
 
 const attributes = {
   src: {
@@ -30,7 +28,19 @@ const attributes = {
 	},
   id: {
 		type: 'number',
-	},
+  },
+  buttonText: {
+    type: 'string',
+    default: 'Download'
+  },
+  alignment: {
+    type: 'string',
+    default: 'none',
+  },
+  aspectRatio: {
+    type: 'string',
+    default: "56.25%",
+  },
 };
 
 const ALLOWED_MEDIA_TYPES = [ 'application/pdf' ];
@@ -56,7 +66,11 @@ registerBlockType( 'derweili/pdf-block', {
 	keywords: [
 		__( 'iframe' ),
 		__( 'PDF' ),
-	],
+  ],
+  
+  supports: {
+    align: [ 'wide', 'full' ],
+  },
 
   attributes,
 
@@ -114,10 +128,11 @@ registerBlockType( 'derweili/pdf-block', {
      }
 
      render() {
-
+        console.log(this.props);
         const { className, attributes } = this.props;
-        const { src } = attributes;
+        const { src, buttonText, aspectRatio } = attributes;
         const { showPreview } = this.state;
+
 
         const onSelectPDF = ( media ) => {
           console.log('onSelectPDF')
@@ -147,15 +162,55 @@ registerBlockType( 'derweili/pdf-block', {
           this.togglePreview();
         };
 
+
         return (
           <Fragment>
+            <InspectorControls>
+              <PanelBody title={ __( 'PDF Settings' ) } className="blocks-responsive">
+                <label class="blocks-base-control__label" for="mce_2">{ __('Download Link Text', 'derweili-pdf-block') }</label>
+                <TextControl
+                  onChange={(newButtonText) => this.props.setAttributes({buttonText: newButtonText})}
+                  value={buttonText}
+                  placeholder={__('Download Button Text')}
+                  ></TextControl>
+                  <label>
+                    Aspect Ratio
+                  </label>
+                  <RadioControl
+                      label="Aspect Ratio"
+                      help="PDF Preview Aspect Ratio"
+                      selected={ aspectRatio }
+                      options={ [
+                          { label: '16 x 9', value: "56.25%" },
+                          { label: '1 x 1', value: "100%" },
+                          { label: 'Din A4', value: "140%" },
+                      ] }
+                      onChange={ ( aspectRatio ) => { this.props.setAttributes( { aspectRatio } ) } }
+                  />
+                  
+              </PanelBody>
+            </InspectorControls>
             <BlockControls>
+              {
+                /* <AlignmentToolbar
+                value={ alignment }
+                onChange={ onChangeAlignment }
+                /> */
+              }
               <Toolbar>
       					{ showPreview && (
       						<IconButton
       							className="components-toolbar__control"
-      							label={ __( 'Edit URL' ) }
+      							label={ __( 'Edit URL', 'derweili-pdf-block' ) }
       							icon="edit"
+      							onClick={ (event) => this.togglePreview(event) }
+      						/>
+      					) }
+      					{ ! showPreview && (
+      						<IconButton
+      							className="components-toolbar__control"
+      							label={ __( 'Edit URL', 'derweili-pdf-block' ) }
+      							icon="welcome-view-site"
       							onClick={ (event) => this.togglePreview(event) }
       						/>
       					) }
@@ -172,15 +227,21 @@ registerBlockType( 'derweili/pdf-block', {
         					allowedTypes={ ALLOWED_MEDIA_TYPES }
         					value={ this.props.attributes }
         					onError={ (error) => console.log('onError', error) }
-                  labels = { { title: 'PDF Viewer', instructions: 'Drag a PDF, upload a new one or select a file from your library.' } }
+                  labels = {
+                    {
+                      title: __('PDF Viewer', 'derweili-pdf-block'),
+                      instructions: __( 'Drag a PDF, upload a new one or select a file from your library.', 'derweili-pdf-block' )
+                    } }
         				/>
 
               }
               { showPreview &&
                 <div>
                   <Disabled>
-                    <iframe src={src} frameborder="0" height="400"></iframe>
-                    <a href={src} className="pdf-download-button">{ __('Download PDF', 'derweili-pdf-block') }</a>
+                    <div className="derweili-pdf-block--iframe-container" style={ {paddingBottom: aspectRatio } } >
+                      <iframe src={src} frameborder="0" height="400"></iframe>
+                    </div>
+                    <a href={src} className="pdf-download-button">{ buttonText }</a>
                   </Disabled>
                 </div>
               }
@@ -196,12 +257,12 @@ registerBlockType( 'derweili/pdf-block', {
 
           save: function( props ) {
             const { className } = props;
-            const { src } = props.attributes;
+            const { src, buttonText } = props.attributes;
         		return (
               <Fragment>
                 <div className={`derweili-pdf-block ${className}`}>
                   <iframe src={src} className={className} frameborder="0"></iframe>
-                  <a href={src} className="pdf-download-button">Download</a>
+                  <a href={src} className="pdf-download-button">{buttonText}</a>
                 </div>
               </Fragment>
         		);
@@ -219,14 +280,14 @@ registerBlockType( 'derweili/pdf-block', {
 	 */
 	save: function( props ) {
     const { className } = props;
-    const { src } = props.attributes;
+    const { src, buttonText, aspectRatio } = props.attributes;
 		return (
       <Fragment>
         <div className={`derweili-pdf-block ${className}`}>
-          <div className="derweili-pdf-block--iframe-container">
+          <div className="derweili-pdf-block--iframe-container" style={ {paddingBottom: aspectRatio } }>
             <iframe src={src} className={className} frameborder="0"></iframe>
           </div>
-          <a href={src} className="pdf-download-button">{ __('Download PDF', 'derweili-pdf-block') }</a>
+          <a href={src} className="pdf-download-button" target="_blank">{ buttonText }</a>
         </div>
       </Fragment>
 		);

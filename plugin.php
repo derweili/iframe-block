@@ -17,7 +17,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
 /**
  * Block Initializer.
  */
 require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
+
+
+/**
+ * Load plugin textdomain.
+ *
+ * @since 1.0.0
+ */
+function derweili_pdf_block_load_textdomain() {
+	load_plugin_textdomain( 'derweili-pdf-block', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+}
+add_action( 'plugins_loaded', 'derweili_pdf_block_load_textdomain' );
