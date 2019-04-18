@@ -9,4 +9,4 @@
  * Webpack is compiling as the input file.
  */
 
-import './iframe/block.js';
+import './pdf/block.js';

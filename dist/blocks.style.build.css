@@ -9,6 +9,8 @@
  *
  * CSS for both Frontend+Backend.
  */
-iframe.wp-block-derweili-iframe-block {
-  width: 100%;
-  height: 600px; }
+.derweili-pdf-block {
+  width: 100%; }
+  .derweili-pdf-block iframe {
+    width: 100%;
+    height: 600px; }

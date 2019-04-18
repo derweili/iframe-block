@@ -24,7 +24,7 @@ function iframe_embed_block_cgb_block_assets() { // phpcs:ignore
 	wp_enqueue_style(
 		'iframe_embed_block-cgb-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		array( 'wp-editor' ) // Dependency to include the CSS after it.
+		array(  ) // Dependency to include the CSS after it. original: array('wp-editor')
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
 	);
 }

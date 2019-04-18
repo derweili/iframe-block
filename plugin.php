@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Iframe Block
+ * Plugin Name: PDF Embed Block
  * Plugin URI: https://github.com/ahmadawais/create-guten-block/
- * Description: Iframe Block for the Gutenberg Block Editor
+ * Description: PDF Block for the Gutenberg Block Editor
  * Author: derweili
  * Author URI: https://derweili.de/
  * Version: 1.0.0
